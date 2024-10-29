@@ -63,4 +63,11 @@ function closeConnection()
   global $conn;
   mysqli_close($conn);
 }
-?>
+
+function searchMahasiswa($table, $condition)
+{
+  global $conn;
+
+  $query = "SELECT * FROM $table WHERE $condition";
+  return query($query);
+}
