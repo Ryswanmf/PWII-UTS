@@ -1,5 +1,5 @@
 <?php
-include 'function.php';
+require_once 'function.php';
 session_start();
 
 if (!isset($_SESSION['logged_in'])) {
@@ -96,98 +96,98 @@ $students = query("SELECT * FROM mahasiswa ORDER BY no ASC");
       </thead>
       <tbody>
         <?php foreach ($students as $student): ?>
-        <tr>
-          <td><?= $student['no']; ?></td>
-          <td><?= $student['nama']; ?></td>
-          <td><?= $student['npm']; ?></td>
-          <td><?= $student['jurusan']; ?></td>
-          <td><?= $student['prodi']; ?></td>
-          <td><?= $student['angkatan']; ?></td>
-          <td>
-            <!-- Edit Button -->
-            <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
-              data-target="#editModal<?= $student['no']; ?>">Edit</button>
+          <tr>
+            <td><?= $student['no']; ?></td>
+            <td><?= $student['nama']; ?></td>
+            <td><?= $student['npm']; ?></td>
+            <td><?= $student['jurusan']; ?></td>
+            <td><?= $student['prodi']; ?></td>
+            <td><?= $student['angkatan']; ?></td>
+            <td>
+              <!-- Edit Button -->
+              <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
+                data-target="#editModal<?= $student['no']; ?>">Edit</button>
 
-            <!-- Delete Button -->
-            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
-              data-target="#deleteModal<?= $student['no']; ?>">Delete</button>
-          </td>
-        </tr>
+              <!-- Delete Button -->
+              <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
+                data-target="#deleteModal<?= $student['no']; ?>">Delete</button>
+            </td>
+          </tr>
 
-        <!-- Edit Modal -->
-        <div class="modal fade" id="editModal<?= $student['no']; ?>" tabindex="-1" role="dialog"
-          aria-labelledby="editModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <form method="POST">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="editModalLabel">Edit Mahasiswa</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <input type="hidden" name="edit" value="true">
-                  <div class="form-group">
-                    <label>No</label>
-                    <input type="text" name="no" class="form-control" value="<?= $student['no']; ?>" required>
+          <!-- Edit Modal -->
+          <div class="modal fade" id="editModal<?= $student['no']; ?>" tabindex="-1" role="dialog"
+            aria-labelledby="editModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <form method="POST">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Mahasiswa</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
                   </div>
-                  <div class="form-group">
-                    <label>Nama</label>
-                    <input type="text" name="nama" class="form-control" value="<?= $student['nama']; ?>" required>
+                  <div class="modal-body">
+                    <input type="hidden" name="edit" value="true">
+                    <div class="form-group">
+                      <label>No</label>
+                      <input type="text" name="no" class="form-control" value="<?= $student['no']; ?>" required>
+                    </div>
+                    <div class="form-group">
+                      <label>Nama</label>
+                      <input type="text" name="nama" class="form-control" value="<?= $student['nama']; ?>" required>
+                    </div>
+                    <div class="form-group">
+                      <label>NPM</label>
+                      <input type="text" name="npm" class="form-control" value="<?= $student['npm']; ?>" required>
+                    </div>
+                    <div class="form-group">
+                      <label>Jurusan</label>
+                      <input type="text" name="jurusan" class="form-control" value="<?= $student['jurusan']; ?>" required>
+                    </div>
+                    <div class="form-group">
+                      <label>Prodi</label>
+                      <input type="text" name="prodi" class="form-control" value="<?= $student['prodi']; ?>" required>
+                    </div>
+                    <div class="form-group">
+                      <label>Angkatan</label>
+                      <input type="text" name="angkatan" class="form-control" value="<?= $student['angkatan']; ?>"
+                        required>
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <label>NPM</label>
-                    <input type="text" name="npm" class="form-control" value="<?= $student['npm']; ?>" required>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" name="edit" class="btn btn-primary">Save changes</button>
                   </div>
-                  <div class="form-group">
-                    <label>Jurusan</label>
-                    <input type="text" name="jurusan" class="form-control" value="<?= $student['jurusan']; ?>" required>
-                  </div>
-                  <div class="form-group">
-                    <label>Prodi</label>
-                    <input type="text" name="prodi" class="form-control" value="<?= $student['prodi']; ?>" required>
-                  </div>
-                  <div class="form-group">
-                    <label>Angkatan</label>
-                    <input type="text" name="angkatan" class="form-control" value="<?= $student['angkatan']; ?>"
-                      required>
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="submit" name="edit" class="btn btn-primary">Save changes</button>
-                </div>
-              </form>
+                </form>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Delete Confirmation Modal -->
-        <div class="modal fade" id="deleteModal<?= $student['no']; ?>" tabindex="-1" role="dialog"
-          aria-labelledby="deleteModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <form method="POST">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Hapus</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <p>Apakah Anda yakin ingin menghapus data mahasiswa <strong><?= $student['nama']; ?></strong> dengan
-                    NPM <strong><?= $student['npm']; ?></strong>?</p>
-                  <input type="hidden" name="no" value="<?= $student['no']; ?>">
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                  <button type="submit" name="delete_confirm" class="btn btn-danger">Hapus</button>
-                </div>
-              </form>
+          <!-- Delete Confirmation Modal -->
+          <div class="modal fade" id="deleteModal<?= $student['no']; ?>" tabindex="-1" role="dialog"
+            aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <form method="POST">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Hapus</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <p>Apakah Anda yakin ingin menghapus data mahasiswa <strong><?= $student['nama']; ?></strong> dengan
+                      NPM <strong><?= $student['npm']; ?></strong>?</p>
+                    <input type="hidden" name="no" value="<?= $student['no']; ?>">
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="submit" name="delete_confirm" class="btn btn-danger">Hapus</button>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
-        </div>
 
         <?php endforeach; ?>
       </tbody>

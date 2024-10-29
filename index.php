@@ -1,5 +1,5 @@
 <?php
-include 'function.php';
+require_once 'function.php';
 
 $students = query("SELECT * FROM mahasiswa");
 ?>
@@ -33,14 +33,14 @@ $students = query("SELECT * FROM mahasiswa");
       </thead>
       <tbody>
         <?php foreach ($students as $student): ?>
-        <tr>
-          <td><?= $student['no']; ?></td>
-          <td><?= $student['nama']; ?></td>
-          <td><?= $student['npm']; ?></td>
-          <td><?= $student['jurusan']; ?></td>
-          <td><?= $student['prodi']; ?></td>
-          <td><?= $student['angkatan']; ?></td>
-        </tr>
+          <tr>
+            <td><?= $student['no']; ?></td>
+            <td><?= $student['nama']; ?></td>
+            <td><?= $student['npm']; ?></td>
+            <td><?= $student['jurusan']; ?></td>
+            <td><?= $student['prodi']; ?></td>
+            <td><?= $student['angkatan']; ?></td>
+          </tr>
         <?php endforeach; ?>
       </tbody>
     </table>
