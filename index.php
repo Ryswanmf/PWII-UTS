@@ -65,7 +65,6 @@
             <div class="d-flex">
               <input class="form-control mr-sm-8" type="search" placeholder="Masukan Data" aria-label="Search">
               <button class="btn btn-outline-primary my-8 my-sm-0" type="submit">Search</button>
-              <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox btn-watch-video d-flex align-items-center"></a>
             </div>
           </div>
           <div class="col-lg-6 order-1 order-lg-2 hero-img">
